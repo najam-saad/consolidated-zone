@@ -53,7 +53,7 @@ export function Hero() {
                 href="/contact"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-violet-700 text-white font-medium transition-all hover:bg-violet-700/20 text-center"
               >
-                Let's Work Together
+                Let&apos;s Work Together
               </Link>
             </div>
           </div>

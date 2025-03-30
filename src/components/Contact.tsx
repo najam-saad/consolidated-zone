@@ -56,7 +56,7 @@ export function Contact() {
           <div className="flex flex-col items-center text-center mb-16">
             <span className="px-4 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-violet-500/10 text-violet-300 border border-violet-500/20 mb-3">Contact Us</span>
             <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold mb-6 text-white">
-              Let's Work <span className="text-secondary">Together</span>
+              Let&apos;s Work <span className="text-secondary">Together</span>
             </h2>
             <p className="max-w-2xl text-gray-400">
               Ready to transform your business with cutting-edge IT solutions? Reach out to our team for a free consultation.
@@ -158,7 +158,7 @@ export function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <h4 className="text-xl font-bold text-white mb-2">Message Sent Successfully!</h4>
-                    <p className="text-gray-300">Thank you for contacting us. We'll get back to you shortly.</p>
+                    <p className="text-gray-300">Thank you for contacting us. We&apos;ll get back to you shortly.</p>
                   </div>
                 ) : formStatus === 'error' ? (
                   <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-6 text-center">

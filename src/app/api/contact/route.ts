@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Set up email transporter
-    const { transporter, testAccount } = await createTransporter();
+    const { transporter } = await createTransporter();
 
     // Send the email
     const mailOptions = {

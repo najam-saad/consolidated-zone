@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -113,7 +112,7 @@ function NavLink({ href, children, highlighted = false }: NavLinkProps) {
   );
 }
 
-function MobileNavLink({ href, children, highlighted = false }: NavLinkProps) {
+function MobileNavLink({ href, children }: NavLinkProps) {
   return (
     <Link 
       href={href} 
