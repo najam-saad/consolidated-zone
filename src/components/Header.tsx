@@ -1,35 +1,55 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="bg-glass py-4 backdrop-blur-md border-b border-violet-900/30 sticky top-0 z-50">
+    <header className={`${scrolled ? 'py-3 bg-glass shadow-lg' : 'py-5 bg-transparent'} backdrop-blur-md border-b border-violet-900/20 sticky top-0 z-50 transition-all duration-300`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center">
-            <h1 className="text-2xl font-bold tracking-tighter text-white neon-glow">
-              CONSOLIDATED<span className="text-secondary neon-glow-strong">ZONE</span>
+            <div className="relative h-10 w-10 mr-3 bg-violet-600 rounded-lg overflow-hidden flex items-center justify-center">
+              <span className="text-white font-bold text-xl">CZ</span>
+              <div className="absolute inset-0 bg-gradient-to-tr from-violet-600 to-violet-400 opacity-70"></div>
+            </div>
+            <h1 className="text-xl font-bold tracking-tighter text-white">
+              Consolidated<span className="text-secondary">Zone</span>
             </h1>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
+            <NavLink href="/">Home</NavLink>
             <NavLink href="/about">About Us</NavLink>
             <NavLink href="/services">Services</NavLink>
             <NavLink href="/portfolio">Portfolio</NavLink>
-            <NavLink href="/team">Team</NavLink>
-            <NavLink href="/apps">Apps</NavLink>
-            <NavLink href="/products">Products</NavLink>
-            <NavLink href="/contact" highlighted>Contact</NavLink>
+            <NavLink href="/blog">Blog</NavLink>
+            <NavLink href="/contact" highlighted>Contact Us</NavLink>
           </nav>
 
           {/* Mobile menu button */}
@@ -46,15 +66,23 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden py-4 flex flex-col space-y-4">
-            <MobileNavLink href="/about">About Us</MobileNavLink>
-            <MobileNavLink href="/services">Services</MobileNavLink>
-            <MobileNavLink href="/portfolio">Portfolio</MobileNavLink>
-            <MobileNavLink href="/team">Team</MobileNavLink>
-            <MobileNavLink href="/apps">Apps</MobileNavLink>
-            <MobileNavLink href="/products">Products</MobileNavLink>
-            <MobileNavLink href="/contact" highlighted>Contact</MobileNavLink>
-          </nav>
+          <div className="md:hidden py-4 mt-4 bg-glass rounded-xl border border-violet-800/20 backdrop-blur-md">
+            <nav className="flex flex-col divide-y divide-violet-800/20">
+              <MobileNavLink href="/">Home</MobileNavLink>
+              <MobileNavLink href="/about">About Us</MobileNavLink>
+              <MobileNavLink href="/services">Services</MobileNavLink>
+              <MobileNavLink href="/portfolio">Portfolio</MobileNavLink>
+              <MobileNavLink href="/blog">Blog</MobileNavLink>
+              <div className="px-4 py-3">
+                <Link
+                  href="/contact"
+                  className="block w-full bg-secondary text-white py-2.5 px-4 rounded-lg text-center font-medium hover:bg-secondary/90 transition-all"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </nav>
+          </div>
         )}
       </div>
     </header>
@@ -71,13 +99,16 @@ function NavLink({ href, children, highlighted = false }: NavLinkProps) {
   return (
     <Link 
       href={href} 
-      className={`text-sm font-medium transition-all duration-200 hover:text-secondary hover:neon-glow ${
+      className={`text-sm font-medium transition-all duration-200 hover:text-secondary relative group ${
         highlighted 
-          ? 'bg-secondary text-white px-4 py-2 rounded-full neon-border hover:bg-secondary/90 hover:text-white' 
-          : 'text-gray-300'
+          ? 'bg-secondary text-white px-5 py-2.5 rounded-full hover:bg-secondary/90 hover:text-white' 
+          : 'text-gray-200'
       }`}
     >
       {children}
+      {!highlighted && (
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+      )}
     </Link>
   );
 }
@@ -86,13 +117,9 @@ function MobileNavLink({ href, children, highlighted = false }: NavLinkProps) {
   return (
     <Link 
       href={href} 
-      className={`text-base font-medium transition-all duration-200 block ${
-        highlighted 
-          ? 'bg-secondary text-white px-4 py-2 rounded-full neon-border text-center' 
-          : 'text-gray-300 hover:text-secondary'
-      }`}
+      className="text-base font-medium transition-all duration-200 block text-gray-200 hover:text-secondary px-4 py-3"
     >
       {children}
     </Link>
   );
-} 
+}

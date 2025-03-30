@@ -1,0 +1,51 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark gradient background -->
+  <rect width="1200" height="800" fill="url(#paint0_radial)" />
+  
+  <!-- Grid lines -->
+  <path d="M0 100H1200M0 200H1200M0 300H1200M0 400H1200M0 500H1200M0 600H1200M0 700H1200" stroke="url(#grid_grad)" stroke-width="0.5" stroke-dasharray="8 12" />
+  <path d="M100 0V800M200 0V800M300 0V800M400 0V800M500 0V800M600 0V800M700 0V800M800 0V800M900 0V800M1000 0V800M1100 0V800" stroke="url(#grid_grad)" stroke-width="0.5" stroke-dasharray="8 12" />
+  
+  <!-- Abstract design elements -->
+  <circle cx="600" cy="400" r="300" fill="url(#circle_grad)" fill-opacity="0.1" />
+  <circle cx="600" cy="400" r="200" stroke="#9333EA" stroke-width="1" stroke-opacity="0.2" />
+  <circle cx="600" cy="400" r="100" stroke="#9333EA" stroke-width="1" stroke-opacity="0.3" />
+  
+  <!-- Animated floating shapes -->
+  <path d="M400 200L500 250L400 300L300 250L400 200Z" fill="#9333EA" fill-opacity="0.3" />
+  <path d="M800 500L900 550L800 600L700 550L800 500Z" fill="#9333EA" fill-opacity="0.3" />
+  <path d="M200 600L250 650L200 700L150 650L200 600Z" fill="#9333EA" fill-opacity="0.3" />
+  <path d="M1000 300L1050 350L1000 400L950 350L1000 300Z" fill="#9333EA" fill-opacity="0.3" />
+  <path d="M600 100L650 150L600 200L550 150L600 100Z" fill="#9333EA" fill-opacity="0.3" />
+  
+  <!-- Glow effects -->
+  <circle cx="400" cy="300" r="50" fill="#9333EA" fill-opacity="0.1" filter="url(#glow)" />
+  <circle cx="800" cy="500" r="50" fill="#9333EA" fill-opacity="0.1" filter="url(#glow)" />
+  <circle cx="200" cy="600" r="30" fill="#9333EA" fill-opacity="0.1" filter="url(#glow)" />
+  <circle cx="1000" cy="300" r="30" fill="#9333EA" fill-opacity="0.1" filter="url(#glow)" />
+  <circle cx="600" cy="100" r="30" fill="#9333EA" fill-opacity="0.1" filter="url(#glow)" />
+
+  <!-- Definitions -->
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 400) rotate(90) scale(600)">
+      <stop offset="0" stop-color="#1a1a2e" />
+      <stop offset="1" stop-color="#0f0f1a" />
+    </radialGradient>
+    
+    <linearGradient id="grid_grad" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9333EA" stop-opacity="0.05" />
+      <stop offset="0.5" stop-color="#9333EA" stop-opacity="0.1" />
+      <stop offset="1" stop-color="#9333EA" stop-opacity="0.05" />
+    </linearGradient>
+    
+    <radialGradient id="circle_grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 400) rotate(90) scale(300)">
+      <stop offset="0" stop-color="#9333EA" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#9333EA" stop-opacity="0" />
+    </radialGradient>
+    
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+</svg> 

@@ -1,0 +1,293 @@
+/* Base styles generated from globals.css */
+:root {
+  --background: #0a0a0a;
+  --foreground: #f2f2f2;
+  
+  --primary: #a855f7;
+  --primary-foreground: #f2f2f2;
+  
+  --secondary: #ec4899;
+  --secondary-foreground: #f2f2f2;
+  
+  --accent: #3b82f6;
+  --accent-foreground: #f2f2f2;
+
+  --tertiary: #06b6d4; 
+  --quaternary: #10b981;
+  --quinary: #f59e0b;
+  
+  --violet: #8b5cf6;
+  --rose: #f43f5e;
+  --indigo: #6366f1;
+  --teal: #14b8a6;
+  --orange: #f97316;
+  --lime: #84cc16;
+  --sky: #0ea5e9;
+  --fuchsia: #d946ef;
+  
+  --neon-glow: 0 0 5px rgba(236, 72, 153, 0.7);
+  --neon-glow-strong: 0 0 10px rgba(236, 72, 153, 0.9), 0 0 20px rgba(236, 72, 153, 0.6);
+  --neon-cyan-glow: 0 0 5px rgba(6, 182, 212, 0.7);
+  --neon-emerald-glow: 0 0 5px rgba(16, 185, 129, 0.7);
+  --neon-amber-glow: 0 0 5px rgba(245, 158, 11, 0.7);
+  --neon-violet-glow: 0 0 5px rgba(139, 92, 246, 0.7);
+  --neon-rose-glow: 0 0 5px rgba(244, 63, 94, 0.7);
+  --neon-indigo-glow: 0 0 5px rgba(99, 102, 241, 0.7);
+  --neon-teal-glow: 0 0 5px rgba(20, 184, 166, 0.7);
+  --neon-orange-glow: 0 0 5px rgba(249, 115, 22, 0.7);
+  --neon-lime-glow: 0 0 5px rgba(132, 204, 22, 0.7);
+  --neon-sky-glow: 0 0 5px rgba(14, 165, 233, 0.7);
+  --neon-fuchsia-glow: 0 0 5px rgba(217, 70, 239, 0.7);
+}
+
+/* Basic styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Animation keyframes */
+@keyframes data-flow {
+  0% { stroke-dashoffset: 1000; opacity: 0.2; }
+  50% { opacity: 0.7; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+@keyframes server-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
+}
+
+@keyframes cloud-drift {
+  0% { transform: translateX(-5px) translateY(0); }
+  50% { transform: translateX(5px) translateY(-5px); }
+  100% { transform: translateX(-5px) translateY(0); }
+}
+
+@keyframes security-shield {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+@keyframes connection-line {
+  0% { opacity: 0; stroke-dashoffset: 300; }
+  50% { opacity: 1; }
+  100% { opacity: 0; stroke-dashoffset: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(236, 72, 153, 0.7); }
+  50% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.9), 0 0 30px rgba(236, 72, 153, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes reveal {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation classes */
+.animate-data-flow {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 1000;
+  animation: data-flow 8s linear infinite;
+}
+
+.animate-server-pulse {
+  animation: server-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-cloud-drift {
+  animation: cloud-drift 6s ease-in-out infinite;
+}
+
+.animate-security-shield {
+  animation: security-shield 4s ease infinite;
+}
+
+.animate-connection-line {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: connection-line 3s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+.animate-reveal {
+  animation: reveal 0.8s ease-out forwards;
+}
+
+/* Background patterns */
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-circuit-pattern {
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.1) 2px, transparent 0),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px, 25px 25px, 25px 25px;
+}
+
+/* Glass effect */
+.bg-glass {
+  background: rgba(15, 15, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Glow effects */
+.neon-glow {
+  text-shadow: var(--neon-glow);
+}
+
+.neon-glow-strong {
+  text-shadow: var(--neon-glow-strong);
+}
+
+.neon-cyan-glow {
+  text-shadow: var(--neon-cyan-glow);
+}
+
+.neon-emerald-glow {
+  text-shadow: var(--neon-emerald-glow);
+}
+
+.neon-amber-glow {
+  text-shadow: var(--neon-amber-glow);
+}
+
+.neon-violet-glow {
+  text-shadow: var(--neon-violet-glow);
+}
+
+.neon-rose-glow {
+  text-shadow: var(--neon-rose-glow);
+}
+
+.neon-indigo-glow {
+  text-shadow: var(--neon-indigo-glow);
+}
+
+.neon-teal-glow {
+  text-shadow: var(--neon-teal-glow);
+}
+
+.neon-orange-glow {
+  text-shadow: var(--neon-orange-glow);
+}
+
+.neon-lime-glow {
+  text-shadow: var(--neon-lime-glow);
+}
+
+.neon-sky-glow {
+  text-shadow: var(--neon-sky-glow);
+}
+
+.neon-fuchsia-glow {
+  text-shadow: var(--neon-fuchsia-glow);
+}
+
+/* Delay animation classes */
+.animate-delayed-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-delayed-2 {
+  animation-delay: 0.2s;
+}
+
+.animate-delayed-3 {
+  animation-delay: 0.3s;
+}
+
+.animate-delayed-4 {
+  animation-delay: 0.4s;
+}
+
+.animate-delayed-5 {
+  animation-delay: 0.5s;
+}
+
+/* Opacity utility classes */
+.opacity-3 {
+  opacity: 0.03;
+}
+
+.opacity-10 {
+  opacity: 0.1;
+}
+
+.opacity-20 {
+  opacity: 0.2;
+}
+
+.opacity-30 {
+  opacity: 0.3;
+}
+
+.opacity-40 {
+  opacity: 0.4;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
+.opacity-70 {
+  opacity: 0.7;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+} 
