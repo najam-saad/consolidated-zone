@@ -31,29 +31,24 @@ export function Header() {
     <header className={`${scrolled ? 'py-3 bg-glass shadow-lg' : 'py-5 bg-transparent'} backdrop-blur-md border-b border-violet-900/20 sticky top-0 z-50 transition-all duration-300`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center">
-            <div className="relative h-10 w-10 mr-3 bg-violet-600 rounded-lg overflow-hidden flex items-center justify-center">
-              <span className="text-white font-bold text-xl">CZ</span>
-              <div className="absolute inset-0 bg-gradient-to-tr from-violet-600 to-violet-400 opacity-70"></div>
-            </div>
-            <h1 className="text-xl font-bold tracking-tighter text-white">
-              Consolidated<span className="text-secondary">Zone</span>
+          <Link href="/" className="flex items-center scale-hover">
+            <h1 className="text-xl font-bold tracking-tighter gradient-text">
+              CONSOLIDATED<span className="text-secondary neon-glow">ZONE</span>
             </h1>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <NavLink href="/">Home</NavLink>
             <NavLink href="/about">About Us</NavLink>
             <NavLink href="/services">Services</NavLink>
             <NavLink href="/portfolio">Portfolio</NavLink>
-            <NavLink href="/blog">Blog</NavLink>
-            <NavLink href="/contact" highlighted>Contact Us</NavLink>
+            <NavLink href="/team">Team</NavLink>
+            <NavLink href="/contact" highlighted>Contact</NavLink>
           </nav>
 
           {/* Mobile menu button */}
           <button 
-            className="md:hidden text-white p-2 focus:outline-none"
+            className="md:hidden text-white p-2 focus:outline-none ripple"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
@@ -65,19 +60,18 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 mt-4 bg-glass rounded-xl border border-violet-800/20 backdrop-blur-md">
+          <div className="md:hidden py-4 mt-4 bg-glass rounded-xl border border-violet-800/20 backdrop-blur-md neon-border-primary">
             <nav className="flex flex-col divide-y divide-violet-800/20">
-              <MobileNavLink href="/">Home</MobileNavLink>
               <MobileNavLink href="/about">About Us</MobileNavLink>
               <MobileNavLink href="/services">Services</MobileNavLink>
               <MobileNavLink href="/portfolio">Portfolio</MobileNavLink>
-              <MobileNavLink href="/blog">Blog</MobileNavLink>
+              <MobileNavLink href="/team">Team</MobileNavLink>
               <div className="px-4 py-3">
                 <Link
                   href="/contact"
-                  className="block w-full bg-secondary text-white py-2.5 px-4 rounded-lg text-center font-medium hover:bg-secondary/90 transition-all"
+                  className="block w-full btn-cyberpunk py-2.5 px-4 rounded-lg text-center font-medium ripple"
                 >
-                  Contact Us
+                  Contact
                 </Link>
               </div>
             </nav>
@@ -100,8 +94,8 @@ function NavLink({ href, children, highlighted = false }: NavLinkProps) {
       href={href} 
       className={`text-sm font-medium transition-all duration-200 hover:text-secondary relative group ${
         highlighted 
-          ? 'bg-secondary text-white px-5 py-2.5 rounded-full hover:bg-secondary/90 hover:text-white' 
-          : 'text-gray-200'
+          ? 'btn-cyberpunk text-white px-5 py-2.5 rounded-full hover:bg-secondary/90 hover:text-white' 
+          : 'text-gray-200 animated-underline'
       }`}
     >
       {children}
@@ -116,7 +110,7 @@ function MobileNavLink({ href, children }: NavLinkProps) {
   return (
     <Link 
       href={href} 
-      className="text-base font-medium transition-all duration-200 block text-gray-200 hover:text-secondary px-4 py-3"
+      className="text-base font-medium transition-all duration-200 block text-gray-200 hover:text-secondary px-4 py-3 text-shadow-hover"
     >
       {children}
     </Link>

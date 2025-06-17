@@ -9,33 +9,20 @@ interface ContactFormData {
   message: string;
 }
 
-// Create a temporary testing account (for development purposes)
-// In production, replace with your actual email service credentials
+// Create a transporter for sending emails
 const createTransporter = async () => {
-  // For production use your actual credentials
-  // const transporter = nodemailer.createTransport({
-  //   host: process.env.EMAIL_HOST,
-  //   port: Number(process.env.EMAIL_PORT),
-  //   secure: Boolean(process.env.EMAIL_SECURE),
-  //   auth: {
-  //     user: process.env.EMAIL_USER,
-  //     pass: process.env.EMAIL_PASS,
-  //   },
-  // });
-
-  // For development, use Ethereal (test emails)
-  const testAccount = await nodemailer.createTestAccount();
+  // Use Gmail SMTP for production
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
+    host: 'smtp.gmail.com',
     port: 587,
-    secure: false,
+    secure: false, // true for 465, false for other ports
     auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
+      user: 'Consolidated.zone@gmail.com',
+      pass: 'S@fikhan2001',
     },
   });
 
-  return { transporter, testAccount };
+  return { transporter };
 };
 
 export async function POST(req: NextRequest) {
@@ -56,8 +43,8 @@ export async function POST(req: NextRequest) {
 
     // Send the email
     const mailOptions = {
-      from: `"Contact Form" <${data.email}>`,
-      to: process.env.CONTACT_EMAIL || 'admin@consolidated-zone.com',
+      from: `"Contact Form" <Consolidated.zone@gmail.com>`,
+      to: 'Consolidated.zone@gmail.com',
       subject: `Contact Form: ${data.subject}`,
       text: `
         Name: ${data.name}

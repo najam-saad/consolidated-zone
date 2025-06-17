@@ -6,9 +6,7 @@ export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    company: '',
-    service: '',
+    subject: '',
     message: ''
   });
 
@@ -24,17 +22,28 @@ export function Contact() {
     setFormStatus('submitting');
     
     try {
-      // Simulate API call with delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log(formData);
+      // Call the actual API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+      
+      const result = await response.json();
+      console.log('Form submission result:', result);
+      
       setFormStatus('success');
       // Reset form
       setFormData({
         name: '',
         email: '',
-        phone: '',
-        company: '',
-        service: '',
+        subject: '',
         message: ''
       });
       // Reset status after 3 seconds
@@ -53,104 +62,76 @@ export function Contact() {
       
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-16">
-            <span className="px-4 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-violet-500/10 text-violet-300 border border-violet-500/20 mb-3">Contact Us</span>
-            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold mb-6 text-white">
-              Let&apos;s Work <span className="text-secondary">Together</span>
+          <div className="flex flex-col items-center text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Get In Touch
             </h2>
             <p className="max-w-2xl text-gray-400">
-              Ready to transform your business with cutting-edge IT solutions? Reach out to our team for a free consultation.
+              Feel free to reach out if you want to collaborate with us, or simply have a chat.
             </p>
           </div>
           
-          <div className="bg-glass rounded-xl border border-violet-500/20 overflow-hidden backdrop-blur-md shadow-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-5 h-full">
-              {/* Contact Info Section */}
-              <div className="lg:col-span-2 p-8 md:p-10 bg-violet-900/30 relative">
-                <div className="absolute top-0 left-0 w-full h-full bg-circuit-pattern opacity-5"></div>
-                
-                <h3 className="text-2xl font-bold text-white mb-8 relative">Contact Information</h3>
-                
-                <div className="space-y-6 relative">
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center mr-4 text-secondary">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Contact Info Card */}
+            <div className="bg-black/30 backdrop-blur-sm rounded-xl border border-violet-900/30 p-10">
+              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+              
+              {/* Location Card */}
+              <div className="mb-8">
+                <div className="flex items-center text-white mb-2">
+                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                       </svg>
+                  <span className="font-medium">Our Location</span>
                     </div>
-                    <div>
-                      <h4 className="text-white font-medium mb-1">Our Location</h4>
-                      <p className="text-gray-300">123 Tech Plaza, Silicon Valley, CA 94043</p>
-                    </div>
+                <p className="text-gray-400 pl-7">123 Tech Plaza, Silicon Valley, CA 94043</p>
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center mr-4 text-secondary">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              {/* Email Card */}
+              <div className="mb-8">
+                <div className="flex items-center text-white mb-2">
+                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                       </svg>
+                  <span className="font-medium">Email Us</span>
                     </div>
-                    <div>
-                      <h4 className="text-white font-medium mb-1">Email Us</h4>
-                      <a href="mailto:info@consolidatedzone.com" className="text-gray-300 hover:text-secondary transition-colors">info@consolidatedzone.com</a>
-                    </div>
+                <p className="text-gray-400 pl-7">info@consolidatedzone.com</p>
                   </div>
                   
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center mr-4 text-secondary">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              {/* Call Card */}
+              <div>
+                <div className="flex items-center text-white mb-2">
+                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                       </svg>
+                  <span className="font-medium">Call Us</span>
                     </div>
-                    <div>
-                      <h4 className="text-white font-medium mb-1">Call Us</h4>
-                      <a href="tel:+15551234567" className="text-gray-300 hover:text-secondary transition-colors">+1 (555) 123-4567</a>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center mr-4 text-secondary">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium mb-1">Working Hours</h4>
-                      <p className="text-gray-300">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    </div>
-                  </div>
+                <p className="text-gray-400 pl-7">+1 (555) 123-4567</p>
                 </div>
                 
-                <div className="mt-12 relative">
-                  <h4 className="text-white font-medium mb-4">Connect With Us</h4>
-                  <div className="flex space-x-4">
-                    <a href="#" className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center text-gray-300 hover:text-secondary transition-colors">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+              {/* Social Icons */}
+              <div className="mt-10 flex space-x-4">
+                <a href="#" className="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-gray-400 hover:text-white transition-colors border border-violet-700/30">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
                       </svg>
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center text-gray-300 hover:text-secondary transition-colors">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M7.5 1.767c1.795 0 2.007.007 2.713.039.655.03 1.01.139 1.245.231.282.109.517.266.745.494s.385.463.493.745c.092.236.201.59.231 1.245.033.706.04.918.04 2.713s-.007 2.007-.04 2.713c-.03.655-.139 1.01-.231 1.245-.109.282-.266.517-.493.745s-.463.385-.745.493c-.236.092-.59.201-1.245.231-.706.033-.918.04-2.713.04s-2.007-.007-2.713-.04c-.655-.03-1.01-.139-1.245-.231-.282-.109-.517-.266-.745-.493s-.385-.463-.493-.745c-.092-.236-.201-.59-.231-1.245-.033-.706-.04-.918-.04-2.713s.007-2.007.04-2.713c.03-.655.139-1.01.231-1.245.109-.282.266-.517.493-.745s.463-.385.745-.493c.236-.092.59-.201 1.245-.231.706-.033.918-.039 2.713-.039m0-1.209c-1.826 0-2.056.008-2.773.04-.716.033-1.205.146-1.633.312-.443.172-.819.401-1.193.775s-.603.75-.775 1.193c-.166.428-.279.917-.312 1.633-.033.717-.04.947-.04 2.773s.007 2.056.04 2.773c.033.716.146 1.205.312 1.633.172.443.401.819.775 1.193s.75.603 1.193.775c.428.166.917.279 1.633.312.717.033.947.04 2.773.04s2.056-.007 2.773-.04c.716-.033 1.205-.146 1.633-.312.443-.172.819-.401 1.193-.775s.603-.75.775-1.193c.166-.428.279-.917.312-1.633.033-.717.04-.947.04-2.773s-.007-2.056-.04-2.773c-.033-.716-.146-1.205-.312-1.633-.172-.443-.401-.819-.775-1.193s-.75-.603-1.193-.775c-.428-.166-.917-.279-1.633-.312-.717-.033-.947-.04-2.773-.04zm0 3.27c-1.909 0-3.457 1.546-3.457 3.454s1.548 3.454 3.457 3.454 3.457-1.546 3.457-3.454-1.548-3.454-3.457-3.454zm0 5.699c-1.238 0-2.242-1.003-2.242-2.244s1.004-2.244 2.242-2.244 2.242 1.003 2.242 2.244-1.004 2.244-2.242 2.244zm4.402-5.83c0 .444-.362.805-.807.805s-.807-.36-.807-.805c0-.444.362-.805.807-.805s.807.36.807.805" />
+                <a href="#" className="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-gray-400 hover:text-white transition-colors border border-violet-700/30">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                       </svg>
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center text-gray-300 hover:text-secondary transition-colors">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05-.78-.83-1.89-1.36-3.16-1.36-2.39 0-4.34 1.94-4.34 4.33 0 .34.04.67.11.98-3.6-.18-6.8-1.91-8.93-4.54-.38.65-.59 1.4-.59 2.21 0 1.5.76 2.83 1.93 3.6-.71-.02-1.37-.22-1.95-.54v.05c0 2.1 1.5 3.85 3.48 4.25-.36.1-.74.15-1.14.15-.27 0-.54-.03-.81-.08.54 1.69 2.12 2.92 4 2.97-1.47 1.15-3.33 1.84-5.33 1.84-.34 0-.69-.02-1.02-.06 1.9 1.22 4.16 1.93 6.58 1.93 7.9 0 12.21-6.54 12.21-12.21 0-.19 0-.37-.01-.56.84-.6 1.56-1.35 2.14-2.2z" />
+                <a href="#" className="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-gray-400 hover:text-white transition-colors border border-violet-700/30">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                       </svg>
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center text-gray-300 hover:text-secondary transition-colors">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19.996 2c1.103 0 2.004.893 2.004 1.992v16.016c0 1.1-.892 1.992-1.995 1.992h-5.782v-6.979h2.333l.351-2.705h-2.684v-1.726c0-.784.218-1.317 1.342-1.317h1.434v-2.422s-.872-.154-1.707-.154c-2.522 0-4.17 1.538-4.17 4.363v1.256h-2.792v2.705h2.792v6.979h-10.124c-1.103 0-1.995-.893-1.995-1.992v-16.016c0-1.1.892-1.992 1.995-1.992h15.997z" />
-                      </svg>
-                    </a>
-                  </div>
                 </div>
               </div>
               
-              {/* Contact Form Section */}
-              <div className="lg:col-span-3 p-8 md:p-10">
-                <h3 className="text-2xl font-bold text-white mb-8">Send Us a Message</h3>
+            {/* Contact Form */}
+            <div className="bg-black/30 backdrop-blur-sm rounded-xl border border-violet-900/30 p-10">
+              <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
                 
                 {formStatus === 'success' ? (
                   <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 text-center">
@@ -170,9 +151,9 @@ export function Contact() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-6">
                       <div>
-                        <label htmlFor="name" className="block text-gray-300 text-sm mb-2">Full Name*</label>
+                      <label htmlFor="name" className="block text-gray-300 text-sm mb-2">Your Name</label>
                         <input
                           type="text"
                           id="name"
@@ -181,12 +162,12 @@ export function Contact() {
                           onChange={handleChange}
                           required
                           placeholder="John Doe"
-                          className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
+                        className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent bg-black/50"
                         />
                       </div>
                       
                       <div>
-                        <label htmlFor="email" className="block text-gray-300 text-sm mb-2">Email Address*</label>
+                      <label htmlFor="email" className="block text-gray-300 text-sm mb-2">Your Email</label>
                         <input
                           type="email"
                           id="email"
@@ -195,87 +176,52 @@ export function Contact() {
                           onChange={handleChange}
                           required
                           placeholder="john@example.com"
-                          className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="phone" className="block text-gray-300 text-sm mb-2">Phone Number</label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          placeholder="+1 (555) 123-4567"
-                          className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="company" className="block text-gray-300 text-sm mb-2">Company Name</label>
-                        <input
-                          type="text"
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          placeholder="Your Company Ltd."
-                          className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-                        />
-                      </div>
+                        className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent bg-black/50"
+                      />
                     </div>
                     
                     <div>
-                      <label htmlFor="service" className="block text-gray-300 text-sm mb-2">Service Interested In*</label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
+                      <label htmlFor="subject" className="block text-gray-300 text-sm mb-2">Subject</label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-                      >
-                        <option value="">Select a service</option>
-                        <option value="Web Development">Web Development</option>
-                        <option value="Mobile App Development">Mobile App Development</option>
-                        <option value="Digital Marketing">Digital Marketing</option>
-                        <option value="SEO Services">SEO Services</option>
-                        <option value="Project Management">Project Management</option>
-                        <option value="IT Consultation">IT Consultation</option>
-                        <option value="Other">Other</option>
-                      </select>
+                        placeholder="How can we help you?"
+                        className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent bg-black/50"
+                      />
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-gray-300 text-sm mb-2">Your Message*</label>
+                      <label htmlFor="message" className="block text-gray-300 text-sm mb-2">Your Message</label>
                       <textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        rows={5}
-                        placeholder="Tell us about your project or inquiry..."
-                        className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
+                        rows={4}
+                        placeholder="Write your message here..."
+                        className="w-full bg-muted border border-violet-700/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent bg-black/50 resize-none"
                       ></textarea>
                     </div>
+                    </div>
                     
-                    <div className="flex justify-end">
+                  <div className="text-right">
                       <button 
                         type="submit"
                         disabled={formStatus === 'submitting'}
-                        className="px-8 py-3 rounded-full bg-secondary text-white font-medium transition-all hover:bg-secondary/90 flex items-center"
+                      className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-secondary text-white font-medium transition-all hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {formStatus === 'submitting' ? (
                           <>
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            Processing...
+                          Sending...
                           </>
                         ) : (
                           'Send Message'
@@ -284,7 +230,6 @@ export function Contact() {
                     </div>
                   </form>
                 )}
-              </div>
             </div>
           </div>
         </div>

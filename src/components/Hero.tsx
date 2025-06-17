@@ -8,17 +8,32 @@ export function Hero() {
   
   useEffect(() => {
     setIsLoaded(true);
+    
+    // Create matrix rain effect
+    const createMatrixRain = () => {
+      const container = document.querySelector('.matrix-rain');
+      if (!container) return;
+      
+      for (let i = 0; i < 50; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('matrix-drop');
+        drop.style.left = `${Math.random() * 100}%`;
+        drop.style.animationDelay = `${Math.random() * 5}s`;
+        drop.style.height = `${Math.random() * 20 + 10}px`;
+        container.appendChild(drop);
+      }
+    };
+    
+    createMatrixRain();
   }, []);
 
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section className="relative py-20 md:py-32 overflow-hidden matrix-container">
+      {/* Matrix Rain Effect */}
+      <div className="matrix-rain absolute inset-0 -z-10 opacity-30"></div>
+      
       {/* Background SVG */}
       <div className="absolute inset-0 -z-10">
-        <img 
-          src="/images/backgrounds/hero-bg.svg" 
-          alt="Background" 
-          className="absolute w-full h-full object-cover"
-        />
         <div className="absolute top-20 right-1/4 w-64 h-64 rounded-full bg-violet-700/30 blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 left-1/4 w-72 h-72 rounded-full bg-blue-700/20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
@@ -26,22 +41,30 @@ export function Hero() {
       {/* Grid overlay */}
       <div className="absolute inset-0 -z-10 bg-grid-pattern opacity-5"></div>
       
+      {/* Glitter effects */}
+      <div className="glitter glitter-1"></div>
+      <div className="glitter glitter-2"></div>
+      <div className="glitter glitter-3"></div>
+      <div className="glitter glitter-4"></div>
+      
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
-          <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-glow-strong">WE ARE</span><br />
-              <span className="text-secondary neon-glow">CONSOLIDATED ZONE</span>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className={`md:w-1/2 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white leading-tight">
+              <span className="gradient-text neon-glow">Elevate</span> Your Business
+              <br />With Cutting-Edge
+              <br /><span className="gradient-text neon-glow">IT Solutions</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-              Your Trusted Virtual IT Solutions Provider For Your Business Needs!
+            <p className="text-xl text-gray-400 mb-8 max-w-2xl typing-text">
+              Empower your business with an integrated range of services designed to transform
+              your digital presence, optimize operations, and accelerate your digital growth.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-secondary text-white font-medium transition-all neon-border hover:bg-secondary/90 text-center"
+                className="btn-cyberpunk inline-flex items-center justify-center px-6 py-3 rounded-full text-white font-medium text-center ripple"
               >
                 Explore Our Services
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -51,72 +74,82 @@ export function Hero() {
               
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-violet-700 text-white font-medium transition-all hover:bg-violet-700/20 text-center"
+                className="btn-glass inline-flex items-center justify-center px-6 py-3 rounded-full text-white font-medium text-center"
               >
-                Let&apos;s Work Together
+                Contact Us
               </Link>
+            </div>
+          </div>
+          
+          <div className="md:w-1/2 flex justify-center">
+            <div className="relative w-full max-w-md">
+              {/* Tech illustration with animated elements */}
+              <div className="relative bg-black/20 backdrop-blur-lg rounded-full p-16 border border-violet-900/30 card-3d">
+                <div className="absolute inset-0 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-transparent"></div>
+                </div>
+                
+                {/* Scanline effect */}
+                <div className="scanline"></div>
+                
+                {/* Animated tech elements */}
+                <div className="relative w-full h-full flex items-center justify-center">
+                  {/* Cloud icon */}
+                  <div className="absolute top-4 right-8 text-white/70 floating" style={{ animationDelay: '0.5s' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+                      <path d="M4.5 10.5C3.12 10.5 2 9.38 2 8s1.12-2.5 2.5-2.5c.28 0 .55.05.8.14C5.55 4.64 6.64 4 8 4c2.08 0 3.8 1.54 4.12 3.53.33-.03.66-.03 1 0C13.8 5.54 15.52 4 17.6 4c1.36 0 2.45.64 2.7 1.64.25-.09.52-.14.8-.14 1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5H19c-.55 0-1 .45-1 1v.01c0 1.09-.89 1.99-1.98 1.99H15c-.55 0-1-.45-1-1s.45-1 1-1h1.02c.54 0 .98-.44.98-.98V10.5h1.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5c-.18 0-.35.03-.51.09C17.95 6.67 17.85 6 17.6 6c-1.53 0-2.8 1.15-2.97 2.66-.64.15-1.21.42-1.73.79-.53-.37-1.11-.64-1.75-.79-.16-1.51-1.44-2.66-2.97-2.66-.26 0-.35.67-.4 1.58-.16-.05-.33-.08-.51-.08-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h1.5v.01c0 .54.44.99.99.99H10c.55 0 1 .45 1 1s-.45 1-1 1H8.98C7.89 13 7 12.1 7 11.01V11c0-.55-.45-1-1-1H4.5z"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Central circle */}
+                  <div className="relative w-24 h-24 rounded-full bg-blue-950/50 border border-blue-500/30 flex items-center justify-center glow-element">
+                    <div className="absolute w-full h-full rounded-full border-2 border-blue-500/30 animate-pulse"></div>
+                    <div className="w-16 h-16 rounded-full bg-blue-900/50 flex items-center justify-center shimmer">
+                      <div className="w-8 h-8 rounded-full bg-blue-500/80"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Server icon */}
+                  <div className="absolute bottom-4 left-8 text-white/70 floating" style={{ animationDelay: '1s' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+                      <path d="M4 5h16v4H4V5zm0 10h16v4H4v-4zm16-14H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 6H4v2h16V7zm0 4H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2zm0 6H4v2h16v-2z"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Security icon */}
+                  <div className="absolute bottom-10 right-4 text-white/70 floating" style={{ animationDelay: '1.5s' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
+                      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         
-        {/* Info cards section - similar to competitor site */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20 bg-glass/50 p-6 rounded-xl border border-violet-900/20">
-          <InfoCard 
-            title="100+" 
-            description="Businesses Empowered" 
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
-              </svg>
-            } 
-          />
-          <InfoCard 
-            title="$5000000+" 
-            description="Revenue Generated" 
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
-              </svg>
-            } 
-          />
-          <InfoCard 
-            title="150+" 
-            description="Projects Completed" 
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
-              </svg>
-            } 
-          />
-          <InfoCard 
-            title="24/7" 
-            description="Support Available" 
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
-              </svg>
-            } 
-          />
+        {/* Stats cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+          <StatsCard number="13500+" label="Projects Delivered" />
+          <StatsCard number="720+" label="Happy Clients" />
+          <StatsCard number="490+" label="Team Members" />
+          <StatsCard number="120+" label="Global Awards" />
         </div>
       </div>
     </section>
   );
 }
 
-interface InfoCardProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
+interface StatsCardProps {
+  number: string;
+  label: string;
 }
 
-function InfoCard({ title, description, icon }: InfoCardProps) {
+function StatsCard({ number, label }: StatsCardProps) {
   return (
-    <div className="flex items-center p-4">
-      <div className="mr-4 text-secondary">{icon}</div>
-      <div>
-        <p className="text-2xl font-bold text-white neon-glow">{title}</p>
-        <p className="text-gray-400 text-sm">{description}</p>
-      </div>
+    <div className="text-center p-6 border border-violet-900/30 rounded-xl bg-black/30 backdrop-blur-sm transition-all hover:border-violet-700/50 hover:bg-black/40 spotlight hover-card hover:scale-105 hover:shadow-lg">
+      <p className="text-3xl md:text-4xl font-bold gradient-text mb-2">{number}</p>
+      <p className="text-gray-400 text-base">{label}</p>
     </div>
   );
 } 

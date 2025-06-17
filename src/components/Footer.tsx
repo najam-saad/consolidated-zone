@@ -5,15 +5,15 @@ export function Footer() {
     <footer className="relative bg-glass backdrop-blur-md border-t border-violet-900/30 pt-20 pb-8">
       {/* Background decorations */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-violet-700/10 blur-3xl"></div>
-        <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-blue-700/10 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-violet-700/10 blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-blue-700/10 blur-3xl animate-pulse"></div>
       </div>
       
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="md:col-span-2">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-2">Consolidated <span className="text-secondary">Zone</span></h2>
+              <h2 className="text-2xl font-bold gradient-text mb-2">Consolidated <span className="text-secondary neon-glow">Zone</span></h2>
               <p className="text-gray-400 text-sm max-w-md">
                 We provide cutting-edge IT solutions to help businesses innovate and thrive in the digital age. Our expertise spans web development, digital marketing, and specialized IT consultancy.
               </p>
@@ -28,7 +28,7 @@ export function Footer() {
           </div>
           
           <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-white">Company</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white animated-underline">Company</h3>
             <ul className="space-y-3">
               <FooterLink href="/about">About Us</FooterLink>
               <FooterLink href="/team">Our Team</FooterLink>
@@ -38,8 +38,8 @@ export function Footer() {
             </ul>
           </div>
           
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-white">Services</h3>
+          <div className="md:col-span-2">
+            <h3 className="text-lg font-semibold mb-4 text-white animated-underline">Services</h3>
             <ul className="space-y-3">
               <FooterLink href="/services/web-development">Web Development</FooterLink>
               <FooterLink href="/services/mobile-development">Mobile Apps</FooterLink>
@@ -47,33 +47,6 @@ export function Footer() {
               <FooterLink href="/services/seo">SEO Services</FooterLink>
               <FooterLink href="/services/it-consultation">IT Consultation</FooterLink>
             </ul>
-          </div>
-          
-          <div className="md:col-span-2">
-            <h3 className="text-lg font-semibold mb-4 text-white">Subscribe to Our Newsletter</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Get the latest updates, news and special offers sent directly to your inbox.
-            </p>
-            <form className="flex flex-col space-y-3">
-              <div className="relative">
-                <input 
-                  type="email" 
-                  placeholder="Your Email Address" 
-                  className="w-full bg-glass border border-violet-700/30 rounded-lg pl-4 pr-12 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-                />
-                <button 
-                  type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-secondary text-white p-1.5 rounded-md hover:bg-secondary/90 transition-colors"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                  </svg>
-                </button>
-              </div>
-              <p className="text-xs text-gray-500">
-                By subscribing, you agree to our Privacy Policy and consent to receive updates.
-              </p>
-            </form>
           </div>
         </div>
         
@@ -100,7 +73,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="mt-8 pt-8 border-t border-violet-900/30">
         <div className="container mx-auto px-4">
-          <h4 className="text-center text-gray-400 text-sm font-semibold mb-6">Trusted by Leading Companies</h4>
+          <h4 className="text-center text-gray-400 text-sm font-semibold mb-6 text-shadow-hover">Trusted by Leading Companies</h4>
           <div className="flex flex-wrap justify-center gap-6">
             <img src="/images/partners/partner-1.svg" alt="Partner" className="h-8 partner-logo" />
             <img src="/images/partners/partner-2.svg" alt="Partner" className="h-8 partner-logo" />
@@ -124,7 +97,7 @@ function FooterLink({ href, children }: FooterLinkProps) {
     <li className="inline-block">
       <Link
         href={href}
-        className="text-gray-400 hover:text-secondary transition-colors duration-200"
+        className="text-gray-400 hover:text-secondary transition-colors duration-200 text-shadow-hover"
       >
         {children}
       </Link>
@@ -143,7 +116,7 @@ function SocialIcon({ href, icon }: SocialIconProps) {
       href={href} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center text-gray-300 hover:text-white hover:bg-secondary/80 transition-all duration-200"
+      className="w-10 h-10 rounded-full bg-violet-700/30 flex items-center justify-center text-gray-300 hover:text-white hover:bg-secondary/80 transition-all duration-200 glow-element ripple scale-hover"
     >
       {icon === 'twitter' && (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
