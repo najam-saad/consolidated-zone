@@ -1,11 +1,5 @@
 'use client';
 
-interface Partner {
-  id: string;
-  name: string;
-  description: string;
-}
-
 const partners = [
   {
     id: '1',

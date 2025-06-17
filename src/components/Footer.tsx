@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Footer() {
   return (
@@ -75,11 +76,11 @@ export function Footer() {
         <div className="container mx-auto px-4">
           <h4 className="text-center text-gray-400 text-sm font-semibold mb-6 text-shadow-hover">Trusted by Leading Companies</h4>
           <div className="flex flex-wrap justify-center gap-6">
-            <img src="/images/partners/partner-1.svg" alt="Partner" className="h-8 partner-logo" />
-            <img src="/images/partners/partner-2.svg" alt="Partner" className="h-8 partner-logo" />
-            <img src="/images/partners/partner-3.svg" alt="Partner" className="h-8 partner-logo" />
-            <img src="/images/partners/partner-4.svg" alt="Partner" className="h-8 partner-logo" />
-            <img src="/images/partners/partner-5.svg" alt="Partner" className="h-8 partner-logo" />
+            <Image src="/images/partners/partner-1.svg" alt="Partner" width={32} height={32} className="h-8 partner-logo" />
+            <Image src="/images/partners/partner-2.svg" alt="Partner" width={32} height={32} className="h-8 partner-logo" />
+            <Image src="/images/partners/partner-3.svg" alt="Partner" width={32} height={32} className="h-8 partner-logo" />
+            <Image src="/images/partners/partner-4.svg" alt="Partner" width={32} height={32} className="h-8 partner-logo" />
+            <Image src="/images/partners/partner-5.svg" alt="Partner" width={32} height={32} className="h-8 partner-logo" />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Partner {
   id: string;
@@ -25,7 +26,7 @@ export function PartnerCard({ partner }: PartnerCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-center mb-4">
-        <img src={partner.logo} alt={partner.name} className="h-10 mr-3" />
+        <Image src={partner.logo} alt={partner.name} width={40} height={40} className="h-10 mr-3" />
         <h3 className="text-lg font-bold text-white">{partner.name}</h3>
       </div>
       

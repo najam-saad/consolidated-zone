@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 
 export function About() {
@@ -51,7 +50,7 @@ export function About() {
                 What started as a small team of passionate technologists has evolved into a 
                 comprehensive IT solutions provider with a global footprint. Our journey has 
                 been marked by consistent growth, innovative approaches, and an unwavering 
-                commitment to our clients' success.
+                commitment to our clients&apos; success.
               </p>
               <p className="text-gray-300 mb-6">
                 We pride ourselves on staying at the forefront of technological advancements 
